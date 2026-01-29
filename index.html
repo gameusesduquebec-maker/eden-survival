@@ -2,159 +2,281 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <title>Eden Survival — ARK Ascended</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eden Survival | ARK Ascended</title>
+  <link href="https://image.noelshack.com/fichiers/2026/05/4/1769645901-a-3d-animated-banner-design-showcasing-b-vxmqlit1s7etzhpuzhpvqg-bhkngiqnsdo3dcedbwb8dw.jpegt">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0b1d16;
-      color: #e6fff4;
+    :root{
+      --primary:#00ffe0;
+      --secondary:#7f00ff;
+      --bg:#05060a;
     }
-    header {
-      background: linear-gradient(135deg, #1f8f6a, #0b1d16);
-      padding: 60px 20px;
-      text-align: center;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:Poppins,sans-serif;
+      background:var(--bg);
+      color:#fff;
+      overflow-x:hidden;
     }
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+    /* RGB BACKGROUND */
+    .rgb-bg{
+      position:fixed;inset:0;
+      background:linear-gradient(120deg,#00ffe0,#7f00ff,#ff005d);
+      background-size:400% 400%;
+      animation:rgb 18s ease infinite;
+      filter:blur(140px);
+      opacity:.45;z-index:-3;
     }
-    header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
+    @keyframes rgb{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
     }
-    nav {
-      background: #102821;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 15px;
+    canvas{position:fixed;inset:0;z-index:-2}
+    header{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:40px;
     }
-    nav a {
-      color: #7fffd4;
-      text-decoration: none;
-      font-weight: bold;
+    .hero{
+      max-width:1000px;
+      width:100%;
+      padding:60px 40px;
+      border-radius:24px;
+      background:rgba(10,12,20,.75);
+      backdrop-filter:blur(14px);
+      box-shadow:0 0 80px rgba(0,255,224,.25);
+      position:relative;
     }
-    section {
-      padding: 60px 20px;
-      max-width: 1100px;
-      margin: auto;
+    .hero::after{
+      content:"";
+      position:absolute;inset:0;
+      border-radius:24px;
+      background:radial-gradient(circle at 30% 20%,rgba(0,255,224,.15),transparent 50%),
+                 radial-gradient(circle at 70% 80%,rgba(127,0,255,.2),transparent 55%);
+      pointer-events:none;
     }
-    h2 {
-      color: #7fffd4;
-      margin-bottom: 20px;
+    h1{
+      font-family:Orbitron,sans-serif;
+      font-size:clamp(2.8rem,6vw,4.5rem);
+      background:linear-gradient(90deg,var(--primary),var(--secondary));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 0 40px rgba(0,255,224,.35);
     }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+    .subtitle{
+      margin-top:12px;
+      letter-spacing:4px;
+      opacity:.75;
+      font-family:Orbitron,sans-serif;
     }
-    .card {
-      background: #102821;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    .hero-img{
+      margin:40px auto 0;
+      max-width:900px;
+      height:420px;
+      border-radius:20px;
+      background:url('https://images.wallpapersden.com/image/download/ark-survival-ascended-4k-game_bmZta2yUmZqaraWkpJRmbmdlrWZlbWU.jpg') center/cover no-repeat;
+      box-shadow:0 0 60px rgba(0,255,224,.3);
+      position:relative;
+      overflow:hidden;
     }
-    .card h3 {
-      margin-top: 0;
-      color: #9fffe0;
+    .hero-img::after{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.75));
     }
-    .btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 20px;
-      background: #1f8f6a;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
+    section{
+      max-width:1200px;
+      margin:120px auto;
+      padding:0 20px;
     }
-    footer {
-      background: #06140f;
-      text-align: center;
-      padding: 30px 20px;
-      font-size: 0.9rem;
-      opacity: 0.8;
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:32px;
+    }
+    .card{
+      background:rgba(12,14,24,.85);
+      padding:34px;
+      border-radius:22px;
+      backdrop-filter:blur(10px);
+      box-shadow:0 0 40px rgba(0,0,0,.6);
+      transition:.35s ease;
+    }
+    .card:hover{
+      transform:translateY(-8px) scale(1.02);
+      box-shadow:0 0 70px rgba(127,0,255,.45);
+    }
+    .card h3{
+      font-family:Orbitron,sans-serif;
+      color:var(--primary);
+      margin-bottom:10px;
+    }
+    .btn{
+      display:inline-block;
+      margin-top:22px;
+      padding:14px 34px;
+      border-radius:30px;
+      background:linear-gradient(90deg,var(--primary),var(--secondary));
+      color:#000;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 0 35px rgba(0,255,224,.55);
+      transition:.25s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform:scale(1.08)}
+    footer{
+      text-align:center;
+      padding:60px 20px;
+      opacity:.6;
+      font-size:.9rem;
+    }
+    #soundBtn{
+      position:fixed;
+      bottom:22px;right:22px;
+      z-index:9999;
     }
   </style>
 </head>
 <body>
 
+<div class="rgb-bg"></div>
+<canvas id="particles"></canvas>
+
+<audio id="ambiance" loop src="https://cdn.pixabay.com/download/audio/2021/09/01/audio_4f3b3c5c2f.mp3"></audio>
+<audio id="click" src="https://cdn.pixabay.com/download/audio/2022/02/23/audio_6f5c0c0f3c.mp3"></audio>
+<audio id="lightning" src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_1d8c9c3b9f.mp3"></audio>
+
+<button id="soundBtn" class="btn">🔊 SON ARK</button>
+<button id="langBtn" class="btn" style="position:fixed;bottom:22px;left:22px;z-index:9999">FR / EN</button>
+
 <header>
-  <h1>🌿 Eden Survival</h1>
-  <p>Serveur ARK Survival Ascended — PVE x20 — Français</p>
+  <div class="hero">
+    <h1>EDEN SURVIVAL</h1>
+    <div class="subtitle">PRIMAL CHAOS ASCENDED</div>
+    <p style="margin-top:18px;opacity:.85">ARK Ascended • PVE • Custom Eden</p>
+    <div class="hero-img" style="background:url('https://images.wallpapersden.com/image/download/ark-survival-ascended-4k_bmZpaWmUmZqaraWkpJRmbmdlrWZlbWU.jpg') center/cover no-repeat"></div>
+    <a href="#shop" class="btn">Entrer dans le chaos</a>
+  </div>
 </header>
 
-<nav>
-  <a href="#infos">Infos</a>
-  <a href="#features">Gameplay</a>
-  <a href="#shop">Boutique</a>
-  <a href="#discord">Discord</a>
-</nav>
-
-<section id="infos">
-  <h2>🦕 À propos du serveur</h2>
-  <p>
-    Eden Survival est un serveur ARK Ascended PVE français axé sur le fun,
-    la progression rapide et une communauté respectueuse. Aucun pay-to-win,
-    admins actifs et événements réguliers.
-  </p>
-</section>
-
-<section id="features">
-  <h2>⚙️ Caractéristiques</h2>
+<section id="about">
+  <h2 style="text-align:center;font-family:Orbitron;margin-bottom:50px">🌍 L’expérience Eden</h2>
   <div class="cards">
-    <div class="card">
-      <h3>🌍 Maps</h3>
-      <p>Ragnarok & Valguero</p>
-    </div>
-    <div class="card">
-      <h3>🪓 Rates</h3>
-      <p>Récolte x20 • XP x15 • Tame instant</p>
-    </div>
-    <div class="card">
-      <h3>🧩 Mods</h3>
-      <p>Structures+, Dino Storage, QoL & dinos custom</p>
-    </div>
-    <div class="card">
-      <h3>🤝 Communauté</h3>
-      <p>Admins actifs • Events • Support rapide</p>
-    </div>
+    <div class="card"><h3>🧬 Primal Chaos</h3><p>Créatures instables, pouvoirs uniques, danger permanent.</p></div>
+    <div class="card"><h3>⚙️ ARK Ascended</h3><p>Graphismes next-gen et optimisation serveur.</p></div>
+    <div class="card"><h3>🌿 Eden Survival</h3><p>PVE équilibré, progression longue durée.</p></div>
   </div>
 </section>
 
 <section id="shop">
-  <h2>🛒 Boutique</h2>
+  <h2 style="text-align:center;font-family:Orbitron;margin-bottom:50px" data-fr="🛒 Boutique" data-en="🛒 Shop">🛒 Boutique</h2>
   <div class="cards">
     <div class="card">
-      <h3>🎁 Pack Débutant</h3>
-      <p>Stuff de départ • Dino utilitaire</p>
-      <p><strong>5€</strong></p>
+      <h3 data-fr="Starter Pack" data-en="Starter Pack">Starter Pack</h3>
+      <p data-fr="1000 Element<br>Kit débutant" data-en="1000 Element<br>Starter Kit">1000 Element<br>Kit débutant</p>
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="TON_EMAIL_PAYPAL">
+        <input type="hidden" name="item_name" value="Starter Pack - Eden Survival">
+        <input type="hidden" name="amount" value="5.00">
+        <input type="hidden" name="currency_code" value="EUR">
+        <button class="btn" type="submit">Acheter</button>
+      </form>
     </div>
     <div class="card">
-      <h3>🦖 Pack Éleveur</h3>
-      <p>Boost élevage • Ressources</p>
-      <p><strong>10€</strong></p>
+      <h3 data-fr="Survivor Pack" data-en="Survivor Pack">Survivor Pack</h3>
+      <p data-fr="2500 Element<br>QoL avancé" data-en="2500 Element<br>Advanced QoL">2500 Element<br>QoL avancé</p>
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="TON_EMAIL_PAYPAL">
+        <input type="hidden" name="item_name" value="Survivor Pack - Eden Survival">
+        <input type="hidden" name="amount" value="10.00">
+        <input type="hidden" name="currency_code" value="EUR">
+        <button class="btn" type="submit">Acheter</button>
+      </form>
     </div>
     <div class="card">
-      <h3>🏗️ Pack Builder</h3>
-      <p>Structures • Matériaux</p>
-      <p><strong>15€</strong></p>
+      <h3 data-fr="Legend Pack" data-en="Legend Pack">Legend Pack</h3>
+      <p data-fr="5000 Element<br>Cosmétiques" data-en="5000 Element<br>Cosmetics">5000 Element<br>Cosmétiques</p>
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="TON_EMAIL_PAYPAL">
+        <input type="hidden" name="item_name" value="Legend Pack - Eden Survival">
+        <input type="hidden" name="amount" value="20.00">
+        <input type="hidden" name="currency_code" value="EUR">
+        <button class="btn" type="submit">Acheter</button>
+      </form>
     </div>
   </div>
-  <p style="margin-top:20px;">🚫 Aucun Pay-to-Win — la boutique soutient le serveur.</p>
+  <p style="text-align:center;opacity:.75;margin-top:30px" data-fr="Paiement réel sécurisé via PayPal (Stripe possible)" data-en="Secure real payment via PayPal (Stripe possible)">Paiement réel sécurisé via PayPal (Stripe possible)</p>
+</section>
+
+<section id="maps">
+  <h2 style="text-align:center;font-family:Orbitron;margin-bottom:50px">🗺️ Maps</h2>
+  <div class="cards">
+    <div class="card"><h3>Ragnarok</h3><p>Wyverns, exploration massive.</p></div>
+    <div class="card"><h3>Valguero</h3><p>Grottes uniques, Deinonychus.</p></div>
+  </div>
 </section>
 
 <section id="discord">
-  <h2>🤖 Rejoins-nous</h2>
-  <p>Rejoins la communauté Eden Survival sur Discord pour les annonces, events et support.</p>
-  <a class="btn" href="#">➡️ Rejoindre le Discord</a>
+  <h2 style="text-align:center;font-family:Orbitron;margin-bottom:40px">🤖 Discord</h2>
+  <div style="text-align:center">
+    <p>Communauté FR active & support rapide</p>
+    <a class="btn">Rejoindre Discord</a>
+  </div>
 </section>
 
-<footer>
-  <p>© Eden Survival — ARK Survival Ascended</p>
-</footer>
+<footer>© 2026 Eden Survival — ARK Ascended</footer>
+
+<script>
+  // PARTICULES
+  const canvas=document.getElementById('particles');
+  const ctx=canvas.getContext('2d');
+  function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+  window.addEventListener('resize',resize);resize();
+  const parts=Array.from({length:140},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,vx:(Math.random()-.5),vy:(Math.random()-.5)}));
+  (function anim(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    parts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>canvas.width)p.vx*=-1;
+      if(p.y<0||p.y>canvas.height)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,255,224,.75)';ctx.fill();
+    });
+    requestAnimationFrame(anim);
+  })();
+
+  // AUDIO
+  const amb=document.getElementById('ambiance');
+  const click=document.getElementById('click');
+  const light=document.getElementById('lightning');
+  const btn=document.getElementById('soundBtn');
+
+  btn.addEventListener('click',()=>{
+    click.currentTime=0;click.play();
+    if(amb.paused){amb.volume=.45;amb.play()}else amb.pause();
+  });
+  btn.addEventListener('mouseenter',()=>{
+    light.currentTime=0;light.volume=.4;light.play();
+  });
+  // LANG FR / EN
+  let lang='fr';
+  const langBtn=document.getElementById('langBtn');
+  langBtn.addEventListener('click',()=>{
+    lang = lang==='fr' ? 'en' : 'fr';
+    document.querySelectorAll('[data-fr]').forEach(el=>{
+      el.innerHTML = el.getAttribute('data-'+lang);
+    });
+    langBtn.textContent = lang.toUpperCase()+' / '+(lang==='fr'?'EN':'FR');
+  });
+</script>
 
 </body>
 </html>
